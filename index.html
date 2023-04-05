@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Start Rating
+		</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sh256-eZrrJcwDc/3uDhsdt61sL2o0BY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+		<link href="https://fonts.googleapis.com/css?family=josefin+sans&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+		
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				box-sizing:border-box;
+				font-family: 'Open Sans', sans-serif;
+				font-family: 'Roboto', sans-serif;			
+			}
+			h1{
+				padding:15px 0;
+				position:absolute;
+				left:50%;
+				transform:translateX(-50%);
+			}
+			.star-rating{
+				width:100%;
+				height:100vh;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				align-items:center;
+				background:skyblue;
+			}
+			.starts{
+				width:400px;
+				height:100px;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+			
+			.star{
+				list-style-type:none;
+				font-size:4rem;
+				padding-left:20px;
+				color:white;
+			}
+			.star:frist-child{padding:0;}
+			
+			img{
+				-webkit-box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+				-moz-box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+				box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+			}
+			.output{
+				width:400px; height:50px; line-height:50px; text-align:center; background:#00b894; 
+				font-size:1.2rem;
+				-webkit-box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+				-moz-box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+				box-shadow: 1px -6px 22px 1px rgba(77,71,77,1);
+			}
+			.next{
+			width:100px; height:40px; line-height:40px; text-align:center; background:#00b894; 
+				font-size:1.2rem; outline:none;
+				border:none;
+			}
+			.next:hover{
+				color:#00b894;
+				background:white;
+				cursor:pointer;
+				border:2px solid #00b894;
+			}
+			.orange{ color : orange;}
+			.yellow{ color : yellow;}
+		</style>				
+				
+
+	</head>
+	<body>
+		<h1>
+			Rate Your Favourite Picture
+		</h1>
+		
+		<div class="star-rating">
+			<img src="https://picsum.photos/400/300/?random">
+			
+			<ul class="starts">
+				<li class="star"><i class="fa fa-star"></i></li>
+				<li class="star"><i class="fa fa-star"></i></li>
+				<li class="star"><i class="fa fa-star"></i></li>
+				<li class="star"><i class="fa fa-star"></i></li>
+				<li class="star"><i class="fa fa-star"></i></li>
+			</ul>
+			<p class="output"> Ratings</p>
+			<br>
+			<button class="next" onclick="nextPage()">NEXT</button>
+		</div>
+		
+		<script>
+			const stars = document.querySelectorAll('.star');
+			const output = document.querySelector('.output');
+			
+			
+			for(x=0; x<stars.length; x++){
+				stars[x].starValue = (x+1);
+				
+				["click", "mouseover", "mouseout"].forEach(function(e){
+					stars[x].addEventListener(e, shaowRating);
+				})
+				
+				
+			}
+			
+			function shaowRating(e){
+				let type = e.type;
+				let starValue = this.starValue;
+				
+				
+				if(type === 'click'){
+						if(starValue > 1){
+							output.innerHTML = "You Rated this " + starValue + " stars." ;
+						}
+					}
+				
+				stars.forEach(function(elem, ind){
+					if(type === 'mouseover'){
+						if(ind< starValue){
+							elem.classList.add("yellow")
+						}else{
+						elem.classList.remove("yellow")
+						}
+					}
+					
+					if(type === 'click'){
+						if(ind< starValue){
+							elem.classList.add("orange")
+						}else{
+						elem.classList.remove("orange")
+						}
+					}
+					
+					if(type === 'mouseout'){
+						
+						elem.classList.remove("yellow")
+						
+					}
+				})
+				
+				
+			}
+			
+			function nextPage(){
+				window.location.reload();
+			}
+			
+		</script>
+	</body>
+</html>
